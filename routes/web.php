@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','HomeController@index');
+Route::get('/cadastroEmpresa','HomeController@formEmpresa');
+Route::post('/login','HomeController@login');
+
+Route::prefix('empresa')->group(function(){
+    Route::get('/','EmpresaController@index');
 });
