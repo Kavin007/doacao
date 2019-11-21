@@ -7,24 +7,37 @@ use Auth;
 
 class HomeController extends Controller
 {
-    public function index ()
+    public function home()
     {
         return view('home.home');
     }
 
-    public function formEmpresa () 
+
+    public function index ()
     {
         return view('home.loginEmpresa');
     }
 
-    public function login (Request $request)
-    {
-        $dados = $request->all();
+    public function login(Request $request)
+    {   
+        $dados = $request;
         
-        if(Auth::attempt(['email'=>$dados['email'],'password'=>$dados['senha']])){
-            return 'logou';
+        if(Auth::attempt(['email' => $dados['email'],'password' => $dados['senha'],'tipo' => $dados['tipo']])){
+            if($dados->tipo == 'ong'){
+                return 'logado como ong';
+            }else {
+                return view('empresa.home');
+            }
+
+        }else {
+
+            return view('home.loginEmpresa');
         }
-        return 'deu merda';
-    
     }
+
+    public function formEmpresa()
+    {
+        return view('empresa.form');
+    }
+
 }

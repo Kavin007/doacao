@@ -28,6 +28,9 @@
                 <li class="nav-item" id="menu_colaborador">
                     <a href="#" class="nav-link">Parceria</a>
                 </li>
+                <li class="nav-item" id="menu_colaborador">
+                    <a href="#" class="nav-link">Sair</a>
+                </li>
 
 
             </ul>
