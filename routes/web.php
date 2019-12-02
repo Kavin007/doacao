@@ -11,12 +11,16 @@
 |
 */
 
+Route::get('/','HomeController@home');//view que mostra a home do site
 
-Route::get('/formEmpresa','HomeController@formEmpresa');
-Route::get('/login','HomeController@index');
-Route::post('/login','HomeController@login');
-Route::get('/','HomeController@home');
+Route::get('/create','HomeController@create');//view do formulario de cadastro
+Route::post('/store','HomeController@store');//salva formulario de cadastro 
 
-Route::prefix('empresa')->group(['middleware'=> 'auth'],function(){
+
+Route::get('/login','HomeController@index'); //view da tela de login
+Route::post('/login','HomeController@login');//rota para autenticar o login
+
+
+Route::get('empresa',function() {
     Route::get('/homeEmpresa','EmpresaController@index');
-});
+})->middleware('auth');

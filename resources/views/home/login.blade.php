@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="form-group col-md-12">
-                    <input type="password" class="form-control" name="senha" placeholder="Senha">
+                    <input type="password" class="form-control" name="password" placeholder="Senha">
                 </div>
 
                 <div class="botao d-flex justify-content-start" style="padding:20px">

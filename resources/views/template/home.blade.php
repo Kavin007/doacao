@@ -23,7 +23,7 @@
             <a class="nav-link active" href="{{url('login')}}">Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="{{url('formEmpresa')}}">Cadastro</a>
+            <a class="nav-link active" href="{{url('create')}}">Cadastro</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Sugestão</a>
