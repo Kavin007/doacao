@@ -66,8 +66,22 @@
                     <div class="col-md-4 mt-3">
                         <input value="{{$data['usuario']}}" name="usuario[numero]" type="text" class="form-control" placeholder="Numero">
                     </div>
-                </div>
 
+                    <div class="col mt-5 text-center">
+                        <label for="">Contato</label>
+                    </div>
+                </div>
+                <!-- contato começa aqui -->
+                <div class="row mt-3">
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" value="{{$data['usuario']}}" name="usuario[telefone]" placeholder="Telefone">
+                    </div>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" value="{{$data['usuario']}}" name="usuario[celular]" placeholder="Celular Opcional">
+                    </div>
+                </div>
+                <!-- botao salvar -->
                 <div class="col mt-5 d-flex justify-content-end ml-3">
                     <button type="submite" class="btn btn-primary">Salvar</button>
                 </div>

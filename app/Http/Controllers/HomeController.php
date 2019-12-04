@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Endereco;
 use App\User;
+use App\Contato;
 
 class HomeController extends Controller
 {
@@ -68,7 +69,14 @@ class HomeController extends Controller
             
             'users_id' => $usuario->id
         ]);
-        return $endereco;
+
+        $contato = Contato::create([
+            'telefone' => $request ['usuario']['telefone'],
+            'celular'  => $request ['usuario']['celular'],
+
+            'users_id' => $usuario->id
+        ]);
+        return view('home.login');
     }
 
 }

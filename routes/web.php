@@ -23,4 +23,5 @@ Route::post('/login','HomeController@login');//rota para autenticar o login
 
 Route::get('empresa',function() {
     Route::get('/homeEmpresa','EmpresaController@index');
+    Route::get('/empresaDoacao','EmpresaController@doacao');
 })->middleware('auth');

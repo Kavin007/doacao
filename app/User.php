@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App/Endereco');
     }
+
+    public function contato()
+    {
+        return $this->belongsTo('App/Contato');
+    }
 }
