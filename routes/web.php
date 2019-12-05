@@ -20,8 +20,11 @@ Route::post('/store','HomeController@store');//salva formulario de cadastro
 Route::get('/login','HomeController@index'); //view da tela de login
 Route::post('/login','HomeController@login');//rota para autenticar o login
 
+Route::get('/edit/{id}','EmpresaController@edit');
+
+
+Route::get('empresaHome','EmpresaController@index');
 
 Route::get('empresa',function() {
-    Route::get('/homeEmpresa','EmpresaController@index');
     Route::get('/empresaDoacao','EmpresaController@doacao');
 })->middleware('auth');

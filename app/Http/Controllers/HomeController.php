@@ -27,9 +27,10 @@ class HomeController extends Controller
         
         if(Auth::attempt(['tipo'=>$dados['tipo'], 'email'=>$dados['email'], 'password'=>$dados['password']])){
            if($dados['tipo'] == 'ong'){
-               return 'ong';
+               return view('ong.home');
            }else if($dados['tipo'] == 'empresa'){
-               return view('empresa.home');
+
+               return redirect('empresaHome');
            }else {
                return view('home.login');
            }
