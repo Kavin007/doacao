@@ -16,7 +16,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="perfil-tab" data-toggle="modal"  href="{{url('/edit/'.auth()->user()->id)}}" data-target="#exampleModal">Editar Dados</a>
+                <a class="nav-link" id="editar" data-toggle="modal" data-target="#exampleModal">Editar Dados</a>
         </ul>
         <!-- aqui começa a parte de perfil do usuario -->
         <div class="tab-content" id="myTabContent">
@@ -35,7 +35,7 @@
                                     <input type="text" class="form-control" value="{{auth()->user()->email}}">
                                 </div>
 
-                                <h1><a href="{{url('/edit/'.auth()->user()->id)}}">link</a></h1>                               
+                                <h1><a href="{{url('/edit/'.auth()->user()->id)}}">link</a></h1>
 
                             </div>
                         </div>
@@ -61,13 +61,33 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Dados</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <form method="put" action="">
+                    @csrf
+                    <div class="form-group">
+                        <label for="">Nome</label>
+                        <input type="text" class="form-control" name="nome"
+                            value="{{isset($usuario) ? $usuario->nome : ''}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">E-mail</label>
+                        <input type="text" class="form-control" name="nome"
+                            value="{{isset($usuario) ? $usuario->email : ''}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Rua</label>
+                        <input type="text" class="form-control" name="rua"
+                            value="{{isset($endereco) ? $endereco->rua : ''}}">
+                    </div>
+
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -77,5 +97,21 @@
     </div>
 </div>
 
+<script>
+$.ajax({
+    url: '/edit',
+    type: 'POST',
+    data:{
+        '_token': $('input[name=_token]').val(),
+        'id': {{auth()->user()->id}},
+    }.done(function(dados){
+        alert('funcionou');
+    }).fail(function(){
+        alert('falha')
+    }).always(function(){
+
+    })
+});
+</script>
 
 @stop
