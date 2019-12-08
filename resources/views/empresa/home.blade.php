@@ -101,17 +101,18 @@
 $.ajax({
     url: '/edit',
     type: 'POST',
+
     data:{
         '_token': $('input[name=_token]').val(),
-        'id': {{auth()->user()->id}},
-    }.done(function(dados){
-        alert('funcionou');
+        id: {{auth()->user()->id}}
+    }).done(function(dados){
+        alert('funcionou',dados)
     }).fail(function(){
         alert('falha')
     }).always(function(){
+})
+})
 
-    })
-});
 </script>
 
 @stop
