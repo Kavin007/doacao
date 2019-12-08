@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use\App\Empresa;
 use\App\User;
 use\App\Endereco;
+use\App\Contato;
 use DB;
 class EmpresaController extends Controller
 {
@@ -16,12 +17,19 @@ class EmpresaController extends Controller
         return view('empresa.home');
     }
 
-    public function edit($id)
-    {   $usuario = User::findOrFail($id);
+    public function edit(Request $request)
+
+    {   
+        $usuario = User::findOrFail($request->id);
         
         $endereco = Endereco::where('users_id',$usuario->id)->first();
 
-        
-        return view('empresa.home',compact('usuario','endereco'));
+        $contato = Contato::where('users_id',$usuario->id)->first();
+        $retorno = [
+            'usuario' => $usuario,
+            'endereco' => $endereco,
+            'contato' => $contato
+        ];
+        return ($retorno);
     }
 }

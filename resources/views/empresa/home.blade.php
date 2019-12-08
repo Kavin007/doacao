@@ -16,7 +16,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="editar" data-toggle="modal" data-target="#exampleModal">Editar Dados</a>
+                <a class="nav-link" id="editar" data-toggle="modal" href="#" data-target="#exampleModal">Editar Dados</a>
         </ul>
         <!-- aqui começa a parte de perfil do usuario -->
         <div class="tab-content" id="myTabContent">
@@ -34,9 +34,6 @@
                                 <div class="col-md-5 mt-3">
                                     <input type="text" class="form-control" value="{{auth()->user()->email}}">
                                 </div>
-
-                                <h1><a href="{{url('/edit/'.auth()->user()->id)}}">link</a></h1>
-
                             </div>
                         </div>
                     </div>
@@ -47,7 +44,35 @@
             <!-- aqui começa parte de doações -->
             <div class="tab-pane fade" id="doacoes" role="tabpanel" aria-labelledby="doaces-tab">
                 <div style="overflow-x:auto;">
-                    <h1>DOAÇÕES</h1>
+                    <div class="card">
+                        <div class="card-header">Doações</div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Vencimento</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Descrição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>1</th>
+                                        <td>08/12/2019</td>
+                                        <td>10</td>
+                                        <td>Higiene Pessoal</td>
+                                        <td>Vencido</td>
+                                        <td>Pasta de Dente</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -67,52 +92,120 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="put" action="">
+                <form method="post" action="{{url('/update')}}">
                     @csrf
-                    <div class="form-group">
-                        <label for="">Nome</label>
-                        <input type="text" class="form-control" name="nome"
-                            value="{{isset($usuario) ? $usuario->nome : ''}}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Nome</label>
+                            <input name="nome" id="nome" type="text" class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="">Email</label>
+                            <input name="email" id="email" type="text" class="form-control">
+                        </div>
+
+                        <div class="col mt-5">
+                            <label for="">Endereço</label>
+                        </div>
+
+                    </div>
+                    <!-- comeca o endereco -->
+
+                    <div class="row mt-3">
+                        <div class="col-md-3">
+                            <label for="">Cep</label>
+                            <input name="cep" type="text" id="cep" class="form-control">
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="">Rua</label>
+                            <input name="rua" type="text" id="rua" class="form-control">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="">Bairro</label>
+                            <input name="bairro" id="bairro" type="text" id="bairro" class="form-control">
+                        </div>
+
+                        <div class="col-md-5 mt-3">
+                            <label for="">Cidade</label>
+                            <input name="cidade" id="cidade" type="text" class="form-control">
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label for="">Estado</label>
+                            <input name="estado" id="estado" type="text" class="form-control">
+                        </div>
+
+                        <div class="col-md-4 mt-3">
+                            <label for="">Número</label>
+                            <input name="numero" id="numero" type="text" class="form-control">
+                        </div>
+
+                        <div class="col mt-5">
+                            <label for="">Contato</label>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="">E-mail</label>
-                        <input type="text" class="form-control" name="nome"
-                            value="{{isset($usuario) ? $usuario->email : ''}}">
+                    <!-- contato começa aqui -->
+                    <div class="row mt-3">
+                        <div class="col-md-5">
+                            <label for="">Telefone</label>
+                            <input type="text" id="telefone" class="form-control" name="telefone">
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="">Celular</label>
+                            <input type="text" id="celular" class="form-control" name="celular">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="">Rua</label>
-                        <input type="text" class="form-control" name="rua"
-                            value="{{isset($endereco) ? $endereco->rua : ''}}">
-                    </div>
 
-                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submite" class="btn btn-primary">Salvar</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
 
+<!-- input que pega id de quem ta logado -->
+<input type="text" hidden name="id" value="{{auth()->user()->id}}" class="numero">
+
+
+<!-- script que preenche o modal com os dados do banco -->
 <script>
+var id = $('.numero').val()
+
 $.ajax({
-    url: '/edit',
-    type: 'POST',
+    url: '/rota',
+    type: 'get',
 
-    data:{
+    data: {
         '_token': $('input[name=_token]').val(),
-        id: {{auth()->user()->id}}
-    }).done(function(dados){
-        alert('funcionou',dados)
-    }).fail(function(){
-        alert('falha')
-    }).always(function(){
-})
-})
+        'id': id
+    }
+}).done(function(dados) {
+    //dados do usuario
+    $('#nome').val(dados.usuario.nome)
+    $('#email').val(dados.usuario.email)
+    //endereco
+    $('#cep').val(dados.endereco.cep)
+    $('#rua').val(dados.endereco.rua)
+    $('#bairro').val(dados.endereco.bairro)
+    $('#cidade').val(dados.endereco.cidade)
+    $('#estado').val(dados.endereco.estado)
+    $('#numero').val(dados.endereco.numero)
+    //contato
+    $('#telefone').val(dados.contato.telefone)
+    $('#celular').val(dados.contato.celular)
 
+}).fail(function() {
+    console.log('falha')
+}).always(function() {})
 </script>
 
 @stop
