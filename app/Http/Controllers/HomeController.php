@@ -7,6 +7,7 @@ use Auth;
 use App\Endereco;
 use App\User;
 use App\Contato;
+use DB;
 
 class HomeController extends Controller
 {
@@ -52,6 +53,10 @@ class HomeController extends Controller
 
     public function store (Request $request)
     {   
+
+        DB::beginTransaction();
+        try {
+
         $usuario = User::create([
 
             'nome' => $request['usuario']['nome'],
@@ -77,7 +82,14 @@ class HomeController extends Controller
 
             'users_id' => $usuario->id
         ]);
-        return view('home.login');
+
+
+        DB::commit();
+        return redirect('/login')->with('success', 'Cadastrado com sucesso');
+    }catch (\Exception $e) {
+        DB::rollback();
+        return redirect('home.form')->with('error', 'Erro ao Cadastrar');
+    }
     }
 
 }

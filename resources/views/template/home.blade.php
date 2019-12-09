@@ -11,11 +11,37 @@
 </head>
 
 <body>
+    <br>
 
+    <div class="row">
+        @if (Session::has('success'))
+        <script>
+        window.onload = function() {
+            alertMsg('{{Session::get("success")}}', 'success')
+        }
+        </script>
+        @endif
+
+        @if (Session::has('warning'))
+        <script>
+        window.onload = function() {
+            alertMsg('{{Session::get("warning")}}', 'warning')
+        }
+        </script>
+        @endif
+
+        @if (Session::has('error'))
+        <script>
+        window.onload = function() {
+            alertMsg('{{Session::get("error")}}', 'error')
+        }
+        </script>
+        @endif
+    </div>
     <ul class="nav justify-content-end">
         <div class="nav d-flex justify-content-start">
             <li class="nav-item">
-                <a class="nav-link active" href="{{url('/')}}">Home</a> 
+                <a class="nav-link active" href="{{url('/')}}">Home</a>
             </li>
         </div>
 
@@ -32,6 +58,24 @@
     <div class="container">
         @yield('content')
     </div>
+
+    <script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
+    <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    function alertMsg(msg, type) {
+        Toast.fire({
+            type: type,
+            title: msg
+        })
+    }
+    </script>
+    @yield('js')
 
 </body>
 

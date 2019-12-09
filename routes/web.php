@@ -20,11 +20,14 @@ Route::post('/store','HomeController@store');//salva formulario de cadastro
 Route::get('/login','HomeController@index'); //view da tela de login
 Route::post('/login','HomeController@login');//rota para autenticar o login
 
-Route::get('/rota','EmpresaController@edit');
 
 
-Route::get('empresaHome','EmpresaController@index');
 
-Route::get('empresa',function() {
+
     Route::get('/empresaDoacao','EmpresaController@doacao');
-})->middleware('auth');
+
+    Route::get('empresaHome','EmpresaController@index');//rota da home da empresa apos logado
+    Route::get('/edit','EmpresaController@edit');//rota de edição dos dados do usuario
+    Route::post('/update','EmpresaController@update');//rota que atualiza os dados nobanc
+
+

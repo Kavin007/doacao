@@ -94,6 +94,7 @@
             <div class="modal-body">
                 <form method="post" action="{{url('/update')}}">
                     @csrf
+                    <input type="text" hidden name="id_usuario" value="{{auth()->user()->id}}"> 
                     <div class="row">
                         <div class="col-md-6">
                             <label for="">Nome</label>
@@ -181,7 +182,7 @@
 var id = $('.numero').val()
 
 $.ajax({
-    url: '/rota',
+    url: '/edit',
     type: 'get',
 
     data: {

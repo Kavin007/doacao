@@ -19,6 +19,33 @@
 </head>
 
 <body>
+    <br>
+
+    <div class="row">
+        @if (Session::has('success'))
+        <script>
+        window.onload = function() {
+            alertMsg('{{Session::get("success")}}', 'success')
+        }
+        </script>
+        @endif
+
+        @if (Session::has('warning'))
+        <script>
+        window.onload = function() {
+            alertMsg('{{Session::get("warning")}}', 'warning')
+        }
+        </script>
+        @endif
+
+        @if (Session::has('error'))
+        <script>
+        window.onload = function() {
+            alertMsg('{{Session::get("error")}}', 'error')
+        }
+        </script>
+        @endif
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <span class="navbar-brand" style="font-weight: bolder">Bem Vindo 'nome da empresa'</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -53,6 +80,24 @@
     <nav class="navbar fixed-bottom navbar-dark bg-dark pt-1 pb-1">
         <footer class="text-light">&copy; Copyright 2019</footer>
     </nav>
+
+    <script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
+    <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    function alertMsg(msg, type) {
+        Toast.fire({
+            type: type,
+            title: msg
+        })
+    }
+    </script>
+    @yield('js')
 
 </body>
 
