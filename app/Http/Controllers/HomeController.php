@@ -26,19 +26,11 @@ class HomeController extends Controller
     {   
         $dados = $request;
         
-        if(Auth::attempt(['tipo'=>$dados['tipo'], 'email'=>$dados['email'], 'password'=>$dados['password']])){
-           if($dados['tipo'] == 'ong'){
-               return view('ong.home');
-           }else if($dados['tipo'] == 'empresa'){
-
+        if(Auth::attempt(['email'=>$dados['email'], 'password'=>$dados['password']])){
                return redirect('empresaHome');
-           }else {
-               return view('home.login');
-           }
-            
-            return view('home.login');
-        }
+
     }
+}
 
     public function create ()
     {
@@ -61,7 +53,6 @@ class HomeController extends Controller
 
             'nome' => $request['usuario']['nome'],
             'email' => $request['usuario']['email'],
-            'tipo' => $request['tipo'],
             'password' => bcrypt($request['usuario']['password'])
     ]); 
 
@@ -88,7 +79,7 @@ class HomeController extends Controller
         return redirect('/login')->with('success', 'Cadastrado com sucesso');
     }catch (\Exception $e) {
         DB::rollback();
-        return redirect('home.form')->with('error', 'Erro ao Cadastrar');
+        return redirect('/create')->with('error', 'Erro ao Cadastrar');
     }
     }
 

@@ -8,13 +8,6 @@
             <form method="post" action="{{url('/login')}}">
             @csrf
                 <div class="form-group col-md-12">
-                    <select name="tipo" class="form-control">
-                        <option value="ong">ONG</option>
-                        <option value="empresa">Empresa</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-12">
                     <input type="text" class="form-control" name="email" placeholder="Email">
                 </div>
 

@@ -16,7 +16,13 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="editar" data-toggle="modal" href="#" data-target="#exampleModal">Editar Dados</a>
+                <a class="nav-link" id="editar" data-toggle="modal" href="#" data-target="#editar-dados">Editar
+                    Dados</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="editar" data-toggle="modal" href="#" data-target="#nova-doacao">Nova Doação</a>
+            </li>
         </ul>
         <!-- aqui começa a parte de perfil do usuario -->
         <div class="tab-content" id="myTabContent">
@@ -32,15 +38,14 @@
                                 </div>
 
                                 <div class="col-md-5 mt-3">
-                                    <input type="text" class="form-control" value="{{auth()->user()->email}}">
+                                    <input type="text" class="form-control" value="{{auth()->user()->email}}" dissabled>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
+
             <!-- aqui começa parte de doações -->
             <div class="tab-pane fade" id="doacoes" role="tabpanel" aria-labelledby="doaces-tab">
                 <div style="overflow-x:auto;">
@@ -80,8 +85,8 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- Modal para editar dados-->
+<div class="modal fade" id="editar-dados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -94,7 +99,7 @@
             <div class="modal-body">
                 <form method="post" action="{{url('/update')}}">
                     @csrf
-                    <input type="text" hidden name="id_usuario" value="{{auth()->user()->id}}"> 
+                    <input type="text" hidden name="id_usuario" value="{{auth()->user()->id}}">
                     <div class="row">
                         <div class="col-md-6">
                             <label for="">Nome</label>
@@ -173,11 +178,69 @@
     </div>
 </div>
 
+<!-- modal para criar uma nova doacao -->
+
+
+<!-- Modal de cadastro nova doacao-->
+<div class="modal fade" id="nova-doacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nova Doação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{url('/storeDoacao')}}">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6">
+                    <input type="text" hidden name="users_id" value="{{auth()->user()->id}}">
+
+                        <label for="">Nome</label>
+                        <input type="text" name="nome" class="form-control" placeholder="nome">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="">Tipo</label>
+                        <select name="tipo" class="form-control" id="">
+                            <option value="higiene pessoal">Higiene Pessoal</option>
+                            <option value="produto nao perecivel">Produtos Não Pereciveis</option>
+                            <option value="utencilios de cozinha">Utensílios de Cozinha</option>
+                            <option value="moveis">Móveis</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="">Validade</label>
+                        <input type="date" name="validade" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="">Quantidade</label>
+                        <input type="text" name="quantidade" class="form-control">
+                    </div>
+
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submite" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- input que pega id de quem ta logado -->
 <input type="text" hidden name="id" value="{{auth()->user()->id}}" class="numero">
 
 
-<!-- script que preenche o modal com os dados do banco -->
+<!-- script que preenche o modal do usuario com os dados do banco -->
 <script>
 var id = $('.numero').val()
 

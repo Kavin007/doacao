@@ -18,19 +18,12 @@
                             placeholder="Email">
                     </div>
 
-                    <div class="col-md-3 mt-3">
-                        <select name="tipo" class="form-control">
-                            <option value="ong"> ONG</option>
-                            <option value="empresa">Empresa</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-5 mt-3">
+                    <div class="col-md-6 mt-3">
                         <input value="{{$data['usuario']}}" name="usuario[password]" type="password" class="form-control"
                             placeholder="Senha">
                     </div>
 
-                    <div class="col-md-4 mt-3">
+                    <div class="col-md-6 mt-3">
                         <input type="password" class="form-control" placeholder="Confirmar Senha">
                     </div>
 

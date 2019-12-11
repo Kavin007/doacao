@@ -7,6 +7,7 @@ use\App\Empresa;
 use\App\User;
 use\App\Endereco;
 use\App\Contato;
+use\App\Doacoes;
 use DB;
 class EmpresaController extends Controller
 {
@@ -71,4 +72,26 @@ class EmpresaController extends Controller
 
         }
 
+        public function storeDoacao(Request $request) {
+            DB::beginTransaction();
+            try {
+            $doacao = Doacoes::create([
+                'nome'       => $request['nome'],
+                'tipo'       => $request['tipo'],
+                'validade'   => $request['validade'],
+                'quantidade' => $request['quantidade'],
+                'status'     =>'disponivel',
+                'users_id'   => $request['users_id']
+            ]);
+
+            DB::commit();
+            return redirect('/empresaHome')->with('success', 'Doação Cadastrada com Sucesso');
+       } catch(\Exception $e) {
+            DB::rollback();
+           return redirect('/empresaHome')->with('error', 'Erro ao Cadastrar nova Doação');
+       
+
+        }
+
     }
+}

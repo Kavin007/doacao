@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App/Contato');
     }
+
+    public function doacao()
+    {
+        return $this->belongsTo('App/Doacao');
+    }
 }

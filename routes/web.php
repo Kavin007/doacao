@@ -24,10 +24,9 @@ Route::post('/login','HomeController@login');//rota para autenticar o login
 
 
 
-    Route::get('/empresaDoacao','EmpresaController@doacao');
 
-    Route::get('empresaHome','EmpresaController@index');//rota da home da empresa apos logado
-    Route::get('/edit','EmpresaController@edit');//rota de edição dos dados do usuario
-    Route::post('/update','EmpresaController@update');//rota que atualiza os dados nobanc
-
-
+    Route::get('/empresaHome','EmpresaController@index'); //rota da home da empresa apos logado
+    Route::get('/edit','EmpresaController@edit'); //rota de edição dos dados do usuario
+    Route::post('/update','EmpresaController@update'); //rota que atualiza os dados no banco
+    Route::post('/storeDoacao','EmpresaController@storeDoacao');
+    
