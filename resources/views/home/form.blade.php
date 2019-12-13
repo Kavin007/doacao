@@ -13,6 +13,8 @@
                             placeholder="Nome">
                     </div>
 
+                    <input type="text" value="empresa" hidden name="tipo">
+
                     <div class="col-md-6">
                         <input value="{{$data['usuario']}}" name="usuario[email]" type="text" class="form-control"
                             placeholder="Email">

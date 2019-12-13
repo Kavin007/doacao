@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nome','email','tipo', 'password',
+        'email','tipo', 'password',
     ];
 
     /**
@@ -37,18 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function endereco()
+    public function empresa()
     {
-        return $this->belongsTo('App/Endereco');
+        return $this->hasOne('App/Empresa');
     }
 
-    public function contato()
-    {
-        return $this->belongsTo('App/Contato');
-    }
-
-    public function doacao()
-    {
-        return $this->belongsTo('App/Doacao');
-    }
 }

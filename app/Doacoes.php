@@ -8,10 +8,10 @@ class Doacoes extends Model
 {
     protected $table = 'doacoes';
 
-    protected $fillable = ['id','nome','tipo','validade','quantidade','status','users_id'];
+    protected $fillable = ['id','nome','tipo','validade','quantidade','status','empresa_id'];
 
     public function user()
     {
-        return $this->hasMany('App/User');
+        return $this->hasMany('App/Empresa');
     }
 }

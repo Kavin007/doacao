@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDoacoesTable extends Migration
+class CreateEmpresasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,12 @@ class CreateDoacoesTable extends Migration
      */
     public function up()
     {
-        Schema::create('doacoes', function (Blueprint $table) {
+        Schema::create('empresas', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('nome');
-            $table->string('tipo');
-            $table->date('validade');
-            $table->integer('quantidade');
-            $table->string('status');
-            $table->integer('empresa_id')->index('fk_empresa');
+            $table->integer('users_id')->index('fk_users');
             $table->timestamps();
         });
-    
     }
 
     /**
@@ -33,6 +28,6 @@ class CreateDoacoesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doacoes');
+        Schema::dropIfExists('empresas');
     }
 }

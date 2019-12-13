@@ -7,6 +7,7 @@ use Auth;
 use App\Endereco;
 use App\User;
 use App\Contato;
+use App\Empresa;
 use DB;
 
 class HomeController extends Controller
@@ -25,9 +26,9 @@ class HomeController extends Controller
     public function login(Request $request)
     {   
         $dados = $request;
-        
-        if(Auth::attempt(['email'=>$dados['email'], 'password'=>$dados['password']])){
-               return redirect('empresaHome');
+        if(Auth::attempt(['tipo'=>$dados['tipo']],['email'=>$dados['email'], 'password'=>$dados['password']])){
+  
+                   return redirect('empresaHome');
 
     }
 }
@@ -45,16 +46,21 @@ class HomeController extends Controller
 
     public function store (Request $request)
     {   
-
+        
         DB::beginTransaction();
         try {
 
         $usuario = User::create([
-
-            'nome' => $request['usuario']['nome'],
             'email' => $request['usuario']['email'],
+            'tipo'  => $request['tipo'],
             'password' => bcrypt($request['usuario']['password'])
     ]); 
+        
+    
+        $empresa = Empresa::create([
+            'nome'     => $request['usuario']['nome'],
+            'users_id' => $usuario->id
+        ]);
 
         $endereco = Endereco::create([
             'cep'    => $request['usuario']['cep'],
@@ -64,16 +70,17 @@ class HomeController extends Controller
             'estado' => $request['usuario']['estado'],
             'numero' => $request['usuario']['numero'],
             
-            'users_id' => $usuario->id
+            'empresa_id' => $empresa->id
         ]);
 
         $contato = Contato::create([
             'telefone' => $request ['usuario']['telefone'],
             'celular'  => $request ['usuario']['celular'],
 
-            'users_id' => $usuario->id
+            'empresa_id' => $usuario->id
         ]);
 
+   
 
         DB::commit();
         return redirect('/login')->with('success', 'Cadastrado com sucesso');
@@ -81,6 +88,6 @@ class HomeController extends Controller
         DB::rollback();
         return redirect('/create')->with('error', 'Erro ao Cadastrar');
     }
-    }
+     }
 
 }

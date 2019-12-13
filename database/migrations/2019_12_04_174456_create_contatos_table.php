@@ -17,7 +17,7 @@ class CreateContatosTable extends Migration
             $table->Increments('id');
             $table->string('telefone');
             $table->string('celular');
-            $table->integer('users_id')->index('fk_users');
+            $table->integer('empresa_id')->index('fk_empresa');
             $table->timestamps();
         });
     }

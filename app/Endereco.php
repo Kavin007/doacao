@@ -8,11 +8,11 @@ class Endereco extends Model
 {
     protected $table = 'enderecos';
 
-    protected $fillable = ['estado','cidade','bairro','cep','rua','numero','users_id'];
+    protected $fillable = ['estado','cidade','bairro','cep','rua','numero','empresa_id'];
 
     public function user()
     {
-        return $this->hasMany('App/User');
+        return $this->hasMany('App/Empresa');
     }
 
     

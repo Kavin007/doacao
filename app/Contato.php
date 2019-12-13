@@ -8,10 +8,10 @@ class Contato extends Model
 {
     protected $table = 'contatos';
 
-    protected $fillable = ['id','telefone','celular','users_id'];
+    protected $fillable = ['id','telefone','celular','empresa_id'];
 
     public function user()
     {
-        return $this->hasMany('App/User');
+        return $this->hasMany('App/Empresa');
     }
 }

@@ -21,7 +21,7 @@ class CreateEnderecosTable extends Migration
             $table->integer('cep');
             $table->string('rua');
             $table->integer('numero');
-            $table->integer('users_id')->index('fk_users');
+            $table->integer('empresa_id')->index('fk_empresa');
 
             $table->timestamps();
         });
