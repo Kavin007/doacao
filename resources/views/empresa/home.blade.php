@@ -34,7 +34,7 @@
                             <div class="row">
 
                                 <div class="col-md-5 mt-3">
-                                    <input type="text" class="form-control" value="{{auth()->user()->nome}}" disabled>
+                                    <input type="text" class="form-control" value="{{auth()->user()->id}}" disabled>
                                 </div>
 
                                 <div class="col-md-5 mt-3">

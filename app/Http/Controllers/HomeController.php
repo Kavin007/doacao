@@ -26,11 +26,11 @@ class HomeController extends Controller
     public function login(Request $request)
     {   
         $dados = $request;
-        if(Auth::attempt(['tipo'=>$dados['tipo']],['email'=>$dados['email'], 'password'=>$dados['password']])){
-  
-                   return redirect('empresaHome');
 
+        if(Auth::attempt([ 'tipo'=>$dados['tipo'], 'email'=>$dados['email'], 'password'=>$dados['password'] ] )){
+            return redirect('empresaHome');
     }
+    
 }
 
     public function create ()
@@ -54,6 +54,8 @@ class HomeController extends Controller
             'email' => $request['usuario']['email'],
             'tipo'  => $request['tipo'],
             'password' => bcrypt($request['usuario']['password'])
+
+
     ]); 
         
     
